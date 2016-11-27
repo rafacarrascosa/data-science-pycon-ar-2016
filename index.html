@@ -1,0 +1,652 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-markdown><script type="text/template">
+				# Data Science en Python
+
+				### Una guía de proyectos y herramientas
+
+　
+
+				#### Rafael Carrascosa - Machinalis
+				#### PyConAr 2016
+
+Note:
+
+- Soy de Córdoba.
+- Apasionado del machine learning.
+- +5 años experiencia industrial machine learning en python.
+- Laburo con un tremendo equipo de profesionales en machinalis.
+- Chivo: Si te gusta lo que ves en la charla, tal vez te gustaría trabajar en machinalis, buscanos despues de la charla
+
+				</script></section>
+				<section data-markdown><script type="text/template">
+## Outline
+
+- El mundo pydata
+- Libs core
+- Libs específicas:
+	- Visualización
+	- Machine Learning
+	- Natural Language Processing
+	- Image Processing
+	- High Performance Computing
+	- Deep Learning
+	- Misc scientific
+
+Note:
+
+- Objetivo: Que a nadie se le escape un proyecto establecido.
+- Disclaimer: Incompleta.
+- Disclaimer: Importancia extremadamente subjetiva.
+
+    			</script>
+			</section>
+
+				<section data-markdown><script type="text/template">
+## Pydata
+
+- Conferencias por todo el mundo.
+- Comunidad muy activa, buena gente.
+- Existe scipy, similar pero distinto.
+- Pueden ver videos en youtube.
+- Pueden ir irl.
+
+Note:
+- Quiero que sepan que existe PyData.
+- El ecosistema es GIGANTE.
+- En los últimos 6 meses han hecho almenos 4.
+- El material que presento es de ese ambiente.
+- Mucho impulso del sector privado, p.ej. Continuum Analytics.
+
+    			</script></section>
+
+				<section data-markdown><script type="text/template">
+## Core
+
+- Libs fundamentales del ambiente pydata.
+- Libs:
+	- numpy
+	- jupyter/ipython
+	- matplotlib
+	- scipy
+	- pandas
+- Obligatorio hacer el tutorial de cada una de ellas.
+
+Note:
+
+- No reinventen la rueda aca.
+
+    			</script></section>
+
+
+				<section data-markdown><script type="text/template">
+## Core: numpy
+
+Arrays n-dimensionales y sus operaciones.
+
+
+ - Memory footprint mínimo.
+ - Corre a velocidad C.
+ - API muy poderosa.
+ - Todas las operaciones de vectores que quieras.
+ - Batteries included: random, fft, etc.
+ - **Todo** esta integrado con numpy.
+
+Note:
+
+- Proyecto fundamental, fundacional.
+- 1-array, 2-matrix, 3-tensor, etc.
+- No reinventar la rueda.
+
+    			</script></section>
+				<section data-markdown><script type="text/template">
+## Core: numpy
+
+Ejemplo de la API de numpy
+
+```python
+# Crear un array numpy
+X = numpy.array([-1, 0, 1, 2, 3])
+
+# Escalar por una constante punto a punto
+X = X * 1.23
+
+# Exponencial punto a punto
+X = X.exp(3)
+
+# Multiplicación de vectores (o matrices)
+Z = X.dot(Y)
+
+# Array más pequeño con todos los elementos menores a 0
+X = X[X < 0]
+```
+
+				</script></section>
+				<section data-markdown><script type="text/template">
+## Core: jupyter notebook
+
+Intérprete interactivo python en el browser
+
+ - [Demo](http://localhost:8888/notebooks/demo.ipynb)
+ - Permite ejecutar en bloques (snippets)
+ - Es stateful (intérprete interactivo)
+ - Visualizaciones
+ - Markdown
+
+Note:
+
+ - Ideal para explorar ideas sobre datos
+ - Se usan como docuementación
+
+    			</script></section>
+				<section data-markdown><script type="text/template">
+## Core: matplotlib
+
+Lib de visualización
+
+ - Standard de facto.
+ - Copia el estilo de MATLAB.
+ - Es vieja, desde 2003.
+ - La documentación **apesta**.
+ - Si te movés de la receta perdés horas.
+
+Note:
+
+ - Es vieja, es un monstruo, poco intuitivo, poco pythonico. Es el default.
+
+				</script></section>
+				<section data-markdown><script type="text/template">
+## Core: matplotlib
+
+Line
+
+```python
+...
+pylab.plot(x, y, ...)  # Listas con coordenadas x e y.
+...
+```
+
+![line](line.png)
+
+    			</script></section>
+				<section data-markdown><script type="text/template">
+## Core: matplotlib
+
+Histogram
+
+```python
+...
+pylab.hist(x, ...)  # x == lista de valores crudos
+...
+```
+
+![hist](hist.png)
+
+    			</script></section>
+				<section data-markdown><script type="text/template">
+## Core: matplotlib
+
+Scatter plot
+
+```python
+...
+pylab.scatter(x, y, ...)  # Listas con coordenadas x e y.
+...
+```
+
+![scatter](scatter.png)
+
+    			</script></section>
+				<section data-markdown><script type="text/template">
+## Core: matplotlib
+
+Y mucho más...
+
+![more2](more2.png)
+![more3](more3.png)
+
+    			</script></section>
+				<section data-markdown><script type="text/template">
+## Core: scipy
+
+Lib para ciencia en general
+
+ - Lib fundamental. Se basa en numpy.
+ - Utilidades de muchas disciplinas.
+ - Muy amplia.
+ - Totally underrated.
+ - Vale la pena sentarse a leer el índice.
+
+Note:
+
+- Sub utilizada por el pythonista de a pie.
+
+				</script></section>
+				<section data-markdown><script type="text/template">
+## Core: scipy
+
+Qué se puede hacer:
+
+- Funciones estadísticas
+- Álgebra lineal
+- Matrices ralas
+- Clustering
+- Procesamiento de imágenes multidimensionales
+- Transformada discreta de Fourier
+- Integración numérica
+- Interpolación
+- Algoritmos espaciales
+
+				</script></section>
+				<section>
+
+<h2> Core: scipy </h2>
+
+<p>Es tan completa que tiene a</p>
+
+<code>scipy.misc.face</code>
+
+<p class="fragment">Get a 1024 x 768, color image of a raccoon face.</p>
+<img class="fragment" src="raccoon.png">
+<img class="fragment" src="true.png">
+
+    			</section>
+				<section data-markdown><script type="text/template">
+## Core: pandas
+
+Lib para datos tabulares + operaciones, todas
+
+ - Popular desde ~2012.
+ - Implementa tablas numéricas (2D).
+ - Muy eficiente.
+ - Muy completa.
+ - Un swiss army knife (aka el cuchillito de McGiver).
+
+
+ Note:
+
+ - El pibe nuevo del equipo core
+ - Implementa TODO
+
+				</script></section>
+				<section data-markdown><script type="text/template">
+## Core: pandas
+
+I/O, parsea lo que le tires:
+
+```python
+# Lee un csv gzippeado
+table = pd.read_csv('foo.csv.gz')
+
+# Lee un HDF5
+table = pd.read_hdf('foo.h5')
+
+# Lee un xlsx
+table = pd.read_excel('foo.xlsx')
+```
+
+No le importa nada, es una lib mercenaria
+
+				</script></section>
+				<section data-markdown><script type="text/template">
+
+## Core: pandas
+
+Permite operaciones database-like
+
+- Filtrado
+- Join
+- Groupby
+- mucho mucho más:
+	- Visualizacion
+	- Manejo de datos faltantes
+	- Time series
+	- Etc.
+
+				</script></section>
+				<section data-markdown><script type="text/template">
+
+## Core: pandas
+
+```python
+import numpy
+from pandas.tools.plotting import scatter_matrix
+df = pd.DataFrame(numpy.random.randn(1000, 4),
+				  columns=['a', 'b', 'c', 'd'])
+scatter_matrix(df, diagonal='kde')
+```
+
+![pandas](pandas.png)
+
+    			</script></section>
+				<section data-markdown><script type="text/template">
+## Viz: bokeh
+
+ - Compila a HTML+CSS+JS.
+ - Interactivo
+ - [Demo](http://bokeh.pydata.org/en/latest/docs/gallery/les_mis.html)
+ - Simple hackear para lograr interacción custom.
+ - Genial para:
+ 	- Explorar datos.
+ 	- Hacer analisis de error.
+ - Con: Un poco no-estandar.
+
+    			</script></section>
+				<section data-markdown><script type="text/template">
+## Viz: altair
+
+ - Compila a HTML+CSS+JS.
+ - Basada en VegaLite y D3.js.
+ - Comparte devs con scikit-learn.
+ - API declarativa, compacta, consisa.
+ - Estrella ascendente.
+ - Cons: No interactivo (por ahora).
+
+Note:
+
+ - Python compila a spec en JSON
+ - spec JSON se grafica usando D3.js
+ - D3.js crece, Vega crece, altair crece.
+
+    			</script></section>
+				<section data-markdown><script type="text/template">
+## ML: scikit-learn
+
+- Lib fundamental del machine learning en Python.
+- Tiene **todo** menos redes neuronales.
+- Gran win: La API
+
+```python
+model = make_pipeline(
+	CountVectorizer(),   # Bag-of-words representation
+	TfidfTransformer(),  # Tf-idf weights
+	TruncatedSVD(10),    # Singular value decomposition
+	SVC()                # SVM Classifier, rbf kernel
+)
+```
+
+Un pipeline clásico de clasificación de texto
+
+Note:
+
+- Comentar qué es machine learning
+- Nombrar ejemplo de machine learning
+- Esta lib convirtio en comodity los algorimos de machine learning.
+- Estoy tentado a decir que es core, pero tengo bias.
+
+    			</script></section>
+				<section data-markdown><script type="text/template">
+## ML: xgboost
+
+Lib con un algoritmo de clasificación y regresión
+
+ - Muy exitoso, gana competencias.
+ - El clasificador por defecto desde ~2015.
+ - Lo que antes era 'le metemos una SVM', hoy es XGBoost.
+
+Note:
+
+- Si hacen machine learning y no lo habían usado: Vayan a usarlo.
+- Kaggle lo adopto de la noche a la mañana, hoy es omnipresente.
+
+
+    			</script></section>
+				<section data-markdown><script type="text/template">
+## NLP: spaCy
+
+ - Desarrollo muy activo.
+ - Alta performance, muy rapido.
+ - Falta el español, pero estan en eso.
+ - Tareas:
+	 - Tokenización
+	 - Pos tagging (Sustantivo, verbo, adjetivo, etc.)
+	 - Parsing (Sujeto directo, objeto directo, etc.)
+	 - Entity recognition (Personas, Entidades, Lugares, etc.)
+
+Note:
+
+- Qué es procesamiento de lenguaje natural
+- El proyecto más serio que anda dando vueltas.
+- Si van a arrancar un proyecto que usa NLP no se queden sin mirar esto.
+
+				</script></section>
+				<section data-markdown><script type="text/template">
+## NLP: gensim
+
+- Modelado de tópicos.
+- Similares: `Obama => {Bush, Clinton, ...}`
+- Analogías: `Francia - Paris + Roma ~= Italia`
+- Útil para sistemas de recomendación.
+- Implementa: Latent semantic analysis.
+- Implementa: `word2vec`
+
+Note:
+
+- Lo mas simple para tener `word2vec`.
+
+    			</script></section>
+				<section data-markdown><script type="text/template">
+## Image: scikit-image
+
+ - Standard de facto
+ - Bastante completa
+ - Buena doc
+ - Comunidad activa
+ - Recomendada para aprender
+ - Ej:
+	- Niveles, contraste, saturación, etc.
+	- Contornos, edge detection.
+	- Descriptores
+	- Segmentación
+	- Etc.
+
+Note:
+
+- Se centra en procesamiento, no tiene detección de nada
+
+    			</script></section>
+				<section data-markdown><script type="text/template">
+## Image: opencv
+
+ - Es una bolsa de algoritmos.
+ - Tiene cosas útiles para I/O de videos/imagenes
+ - Tiene cosas de detección.
+ - Documentación muy pobre.
+ - Deep learning la esta empujando al olvido.
+ - Fue lo mejorcito que había.
+
+Note:
+
+- Tiene un ejemplo de detección de caras que fue furor en internet muchos años
+
+    			</script></section>
+				<section data-markdown><script type="text/template">
+## HPC: dask
+
+ - Lib para computo distribuido
+ - API simple
+ - Compatible con numpy, pandas, etc.
+ - Conceptos: Client, Scheduler, Workers
+
+```python
+from distributed import Client
+
+# Connects with the scheduler process
+client = Client('127.0.0.1:8786')
+
+# map some_function on data, over a cluster
+result = client.submit(some_function, data)
+```
+
+Note:
+
+ - La división de responsabilidades similar celery
+ - La funcionalidad similar map-reduce
+
+    			</script></section>
+				<section data-markdown><script type="text/template">
+## HPC: pyspark
+
+ - Wrapper python para Apache Spark
+ - Alta integración con el ecosistema Hadoop:
+	- MLib
+	- Cassandra
+	- Etc.
+ - Con: La idiosincrasia Hadoop no pythonica
+ - Pro: Tenes acceso al gigantesco mundo de Hadoop
+
+Note:
+
+- Java
+
+    			</script></section>
+				<section data-markdown><script type="text/template">
+## Deep Learning: Keras
+
+ - Lib de alto nivel.
+ - Excelente API.
+ - Buen lugar para comenzar con deep learning.
+
+```python
+model = Sequential([
+	Convolution2D(128, 3, 3, input_shape=(1, 28, 28)),
+	MaxPooling2D(pool_size=(2, 2)),
+	Convolution2D(64, 3, 3),
+	MaxPooling2D(pool_size=(2, 2)),
+	Flatten(),
+	Dense(output_dim=128, activation="tanh"),
+	Dense(output_dim=10, activation="softmax")
+])
+```
+
+Note:
+
+ - Lo mejor de keras es la API.
+ - Mas alejada de la matemática
+
+    			</script></section>
+				<section data-markdown><script type="text/template">
+## Deep Learning: Tensorflow
+
+ - Lib de bajo nivel
+ - Cerca de la matemática
+ - Tiene alto soporte
+ - Se encamina a ser el backend de facto
+ - Totally overrated
+
+Note:
+
+ - No me parece un buen lugar para empezar a aprender.
+
+    			</script></section>
+				<section data-markdown><script type="text/template">
+## Deep Learning: Lasagne
+
+ - Lib bajo nivel
+ - Basada en theano
+ - Facil de customizar
+ - Cerca de la matemática
+ - Poca documentación
+ - Poco soporte
+
+
+ Note:
+
+  - No me parece un buen lugar para empezar a aprender.
+
+    			</script></section>
+				<section data-markdown><script type="text/template">
+## Misc: Theano
+
+Lib elemental para optimización numérica
+
+- Ampliamente usada para deeplearning.
+- Compila funciones a C.
+- Permite ejecutar en CPU y GPU.
+- Diferenciación simbólica/automática, optimización, etc.
+- Es el pilar de muchas otras libs.
+
+Note:
+ - Querrias usar theano cuando estas escribiendo tu propio machine learning y te hacen falta una derivada imposibles.
+
+    			</script></section>
+				<section data-markdown><script type="text/template">
+## Misc: Cython
+
+Lenguaje python-like que compila a C
+
+ - Permite compilar módulos cython a C
+ - Esos módulos se importan en python normalmente
+ - El código corre mucho más rápido
+ - Bastante popular
+
+    			</script></section>
+				<section data-markdown><script type="text/template">
+## Misc: todo lo demás
+
+- networkx: Todo sobre grafos.
+- sympy: Calculo simbólico.
+- pymc3: Markov-chain monte-carlo y amigos.
+- statsmodels: Todo sobre estadistica.
+- luigi, airflow: Flujos de datos complejos. Make high en espinaca.
+- astropy: Todo sobre astronomia.
+- Viz: seaborn, pygal, plot.ly, ggplot.
+- blaze, xarray, pytables: Cuando pandas se queda chico.
+- Anaconda, canopy, spyder: entornos python para data science.
+
+				</script></section>
+				<section data-markdown><script type="text/template">
+
+# Fin
+
+### Preguntas y comentarios bienvenidos!
+
+    			</script></section>
+
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				history: true,
+				transition: 'none',
+				transitionSpeed: 'fast',
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
